@@ -61,75 +61,129 @@ public class DateUtilTest {
 	 */
 	
 	@Test
-    public void testDayEquivalenceClasses() {
-        // Test cases for day equivalence classes
-        
-        // D1: Day between 1 to 28 (non-leap year)
-        DateUtil dateD1 = new DateUtil(15, 1, 2023);
-        dateD1.increment();
-        assertEquals( 16, dateD1.getDay());
-        
-        // D2: Day 29 (leap year)
-        DateUtil dateD2 = new DateUtil(29, 2, 2024);
-        dateD2.increment();
-        assertEquals( 1, dateD2.getDay());
-        assertEquals( 3, dateD2.getMonth());
-        
-        // D3: Day 30
-        DateUtil dateD3 = new DateUtil(30, 4, 2022);
-        dateD3.increment();
-        assertEquals( 1, dateD3.getDay());
-        assertEquals( 5, dateD3.getMonth());
-        
-        // D4: Day 31
-        DateUtil dateD4 = new DateUtil(31, 12, 2023);
-        dateD4.increment();
-        assertEquals( 1, dateD4.getDay());
-        assertEquals( 1, dateD4.getMonth());
-        assertEquals( 2024, dateD4.getYear());
+    public void testIncrementD1() {
+        DateUtil date = new DateUtil(15, 5, 2024);
+        date.increment();
+        assertEquals("Increment D1: Incrementing day within a 28-day month", "16 May 2024", date.toString());
     }
 
-	@Test
-	public void testMonthEquivalenceClasses() {
-	    // Test cases for month equivalence classes
-	    
-	    // M1: Months with 30 days
-	    DateUtil dateM1 = new DateUtil(15, 4, 2023);
-	    dateM1.increment();
-	    assertEquals( 16, dateM1.getDay());
-	    
-	    // M2: Months with 31 days
-	    DateUtil dateM2 = new DateUtil(15, 3, 2023);
-	    dateM2.increment();
-	    assertEquals( 3, dateM2.getMonth());
-	    assertEquals( 16, dateM2.getDay());
-	    
-	    // M3: February (non-leap year)
-	    DateUtil dateM3 = new DateUtil(28, 2, 2023);
-	    dateM3.increment();
-	    assertEquals(3, dateM3.getMonth());
-	    assertEquals(1, dateM3.getDay());
-	    
-	    // M4: February (leap year)
-	    DateUtil dateM4 = new DateUtil(28, 2, 2024);
-	    dateM4.increment();
-	    assertEquals(29, dateM4.getDay());
-	}
+    @Test
+    public void testIncrementD2() {
+        DateUtil date = new DateUtil(29, 2, 2024);
+        date.increment();
+        assertEquals("Increment D2: Incrementing from day 29", "1 March 2024", date.toString());
+    }
 
-	@Test
-	public void testYearEquivalenceClasses() {
-	    // Test cases for year equivalence classes
-	    
-	    // Y1: Years without a leap year
-	    DateUtil dateY1 = new DateUtil(15, 1, 2023);
-	    dateY1.increment();
-	    assertEquals(16, dateY1.getDay());
-	    
-	    // Y2: Leap years
-	    DateUtil dateY2 = new DateUtil(15, 1, 2024);
-	    dateY2.increment();
-	    assertEquals( 1, dateY2.getMonth());
-	    assertEquals(16, dateY2.getDay());
-	}
+    @Test
+    public void testIncrementD3() {
+        DateUtil date = new DateUtil(30, 4, 2022);
+        date.increment();
+        assertEquals("Increment D3: Incrementing from a 30-day month", "1 May 2022", date.toString());
+    }
+
+    @Test
+    public void testIncrementD4() {
+        DateUtil date = new DateUtil(31, 7, 2021);
+        date.increment();
+        assertEquals("Increment D4: Incrementing from a 31-day month", "1 August 2021", date.toString());
+    }
+
+    @Test
+    public void testDecrementD1() {
+        DateUtil date = new DateUtil(20, 9, 2020);
+        date.decrement();
+        assertEquals("Decrement D1: Decrementing day within a 28-day month", "19 September 2020", date.toString());
+    }
+
+    @Test
+    public void testDecrementD2() {
+        DateUtil date = new DateUtil(29, 2, 2024);
+        date.decrement();
+        assertEquals("Decrement D2: Decrementing from day 29", "28 February 2024", date.toString());
+    }
+
+    @Test
+    public void testDecrementD3() {
+        DateUtil date = new DateUtil(30, 4, 2023);
+        date.decrement();
+        assertEquals("Decrement D3: Decrementing from a 30-day month", "29 April 2023", date.toString());
+    }
+
+    @Test
+    public void testDecrementD4() {
+        DateUtil date = new DateUtil(31, 12, 2022);
+        date.decrement();
+        assertEquals("Decrement D4: Decrementing from a 31-day month", "30 December 2022", date.toString());
+    }
+
+    @Test
+    public void testIncrementM1() {
+        DateUtil date = new DateUtil(30, 4, 2022);
+        date.increment();
+        assertEquals("Increment M1: Incrementing from a 30-day month", "1 May 2022", date.toString());
+    }
+
+    @Test
+    public void testIncrementM2() {
+        DateUtil date = new DateUtil(31, 7, 2021);
+        date.increment();
+        assertEquals("Increment M2: Incrementing from a 31-day month", "1 August 2021", date.toString());
+    }
+
+    @Test
+    public void testIncrementM3() {
+        DateUtil date = new DateUtil(28, 2, 2023);
+        date.increment();
+        assertEquals("Increment M3: Incrementing from February (non-leap year)", "1 March 2023", date.toString());
+    }
+
+    @Test
+    public void testDecrementM1() {
+        DateUtil date = new DateUtil(30, 4, 2022);
+        date.decrement();
+        assertEquals("Decrement M1: Decrementing from a 30-day month", "29 April 2022", date.toString());
+    }
+
+    @Test
+    public void testDecrementM2() {
+        DateUtil date = new DateUtil(31, 7, 2021);
+        date.decrement();
+        assertEquals("Decrement M2: Decrementing from a 31-day month", "30 July 2021", date.toString());
+    }
+
+    @Test
+    public void testDecrementM3() {
+        DateUtil date = new DateUtil(28, 2, 2023);
+        date.decrement();
+        assertEquals("Decrement M3: Decrementing from February (non-leap year)", "27 February 2023", date.toString());
+    }
+
+    @Test
+    public void testIncrementY1() {
+        DateUtil date = new DateUtil(28, 2, 2024);
+        date.increment();
+        assertEquals("Increment Y1: Incrementing from a leap year", "29 February 2024", date.toString());
+    }
+
+    @Test
+    public void testIncrementY2() {
+        DateUtil date = new DateUtil(28, 2, 2023);
+        date.increment();
+        assertEquals("Increment Y2: Incrementing from a non-leap year", "1 March 2023", date.toString());
+    }
+
+    @Test
+    public void testDecrementY1() {
+        DateUtil date = new DateUtil(28, 2, 2024);
+        date.decrement();
+        assertEquals("Decrement Y1: Decrementing from a leap year", "27 February 2024", date.toString());
+    }
+
+    @Test
+    public void testDecrementY2() {
+        DateUtil date = new DateUtil(28, 2, 2023);
+        date.decrement();
+        assertEquals("Decrement Y2: Decrementing from a non-leap year", "27 February 2023", date.toString());
+    }
 	
 }
